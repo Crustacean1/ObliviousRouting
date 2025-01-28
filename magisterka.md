@@ -1,0 +1,11 @@
+# Literature 
+- Optimal Oblivious Routing for Structured Networks
+- Racke 1
+- Racke 2
+- Robust Validation of Network Designs under Uncertain Demands and Failures
+- Approximation Algorithms for Network Design in Non-Uniform Fault Models
+- Arc routing under uncertainty: Introduction and literature review
+- Hop-Constrained Oblivious Routing
+- Survey on Oblivious Routing Strategies
+- Semi-Oblivious Traffic Engineering:The Road Not Taken (słabe)
+- Optimal hierarchical decompositions for congestion minimization in networks
