@@ -4,7 +4,7 @@
 - Racke 2
 - Robust Validation of Network Designs under Uncertain Demands and Failures
 - Approximation Algorithms for Network Design in Non-Uniform Fault Models
-- Arc routing under uncertainty: Introduction and literature review
+- Arc routing under uncertainty: Introduction and literature review (ogólne)
 - Hop-Constrained Oblivious Routing
 - Survey on Oblivious Routing Strategies
 - Semi-Oblivious Traffic Engineering:The Road Not Taken (słabe)
