@@ -1,4 +1,5 @@
 function cut_cluster(cluster, distances, pi, beta)
+  println("Beta: ", beta)
   clustered = [[i for i in cluster if distances[p,i] < beta] for p in pi]
   total = []
 
@@ -94,7 +95,8 @@ function frt_decomposition(graph, distance_matrix, beta, pi)
   	#display(D)
 
   	while any([size(cluster)[1] != 1 for cluster in D[end]])
-		delta = Delta - 1 - size(D)[1]
+		  delta = Delta - 1 - size(D)[1]
+
     	d = vcat([cut_cluster(c, distance_matrix, pi, beta * (2.0 ^ delta)) for c in D[end]]...)
     	centers = vcat([pi for _ in D[end]]...)
 
@@ -120,6 +122,7 @@ function cluster_connection(graph, assigned, unassigned)
   cind = assigned[x]#findfirst(a -> y in a, unassigned)
   dind = unassigned_nodes[y]#findfirst(a -> x in a, assigned)
 
+
   gind = findfirst(a -> dind in a, unassigned)
   assigned = vcat(assigned, unassigned[gind])
   deleteat!(unassigned, gind)
@@ -130,8 +133,8 @@ end
 function cut_tree_to_spanning_tree(graph, layers)
   n = size(graph)[1]
 
-  println("Layers")
-  display(layers)
+  #println("Layers")
+  #display(layers)
   if size(layers)[1] == 0
     return  []
   end
@@ -144,6 +147,7 @@ function cut_tree_to_spanning_tree(graph, layers)
   cluster_size = size(collect(Iterators.flatten(layers[1])))[1]
   while size(assigned)[1] != cluster_size
     assigned, unassigned, edge = cluster_connection(graph, assigned, unassigned)
+    println("Found  $(cluster_size) to $(size(assigned)[1]) edge $(size(layers)[1]): ", edge, " " , assigned," ", unassigned)
     edges = vcat(edges, edge)
   end
 

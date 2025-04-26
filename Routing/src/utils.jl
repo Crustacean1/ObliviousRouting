@@ -85,6 +85,7 @@ function compute_congestion(graph, routing, demand)
 			total  = total .+ (routing(i,j) .* demand[i,j])
 		end
 	end
+  total[diagind(total)] .= 0
 	ratio =  total ./ graph
 	return maximum([isnan(ratio[i,j]) ? 0 : ratio[i,j] for i in 1:n, j in 1:n])
 end
