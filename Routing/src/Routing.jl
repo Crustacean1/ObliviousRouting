@@ -72,6 +72,8 @@ for (t_name, topology) in topologies
 				println(t_name, "\t", r_name, "\t", demand_name, "\t", optimal_congestion[i], "\t", routing_congestion)
 			end
 
+      println("Rolling")
+
 			push!(optimal_data, optimal_congestion)
 			push!(topology_data, [t_name])
 			push!(routing_data, [r_name])
@@ -79,6 +81,7 @@ for (t_name, topology) in topologies
 		end
 	end
 end
+println("Done")
 
 data = hcat(topology_data, demand_data,  routing_data, optimal_data, congestion_data)
 data = ([vcat(data[i,:]...) for i in 1:size(data)[1]])
