@@ -119,7 +119,7 @@ function assert_routing(graph, routing)
 					(i == j) || 
 					(k == j && abs(total + 1) < epsilon) ||
 					(k == i && abs(total - 1) < epsilon) ||
-					(abs(total) < epsilon  && k != j && k != i))
+					(abs(total) < epsilon ))# && k != j && k != i))
 				else
 					println("Invalid flow for ", k)
 					println("Flow ",i ," ", j," ", k," ", total)

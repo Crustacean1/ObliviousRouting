@@ -21,9 +21,41 @@ function mccf(graph, demands)
 
 	optimize!(model)
 	
-	if termination_status(model) == MOI.OPTIMAL
-		return (value(beta), value(beta))
-	else
-		return (value(beta), Inf)
+	return value(beta)
+end
+
+function perm_mccf(graph, permutation)
+	n = size(graph)[1]
+	d = floor(Int,log(2,n))
+
+	model = Model(GLPK.Optimizer)
+
+	@variable(model, in_flow[1:n,1:n,1:d] >=0)
+
+	@variable(model, beta >= 0)
+
+	perm_vec = permutation - Diagonal(ones(size(permutation,1)))
+	#perm_vec = [((i == permutation[j]) ? 1 : 0) - ((i == j) ? 1 : 0) for i in 1:n,j in 1:n]
+
+	@constraint(model, [k=1:n, j=1:n], sum(in_flow[k,j,i] for i in 1:d) == sum(in_flow[k,xor(j - 1 ,(2^(i-1))) + 1,i] for i in 1:d) + perm_vec[k,j]);
+	@constraint(model, [i=1:n, j=1:d], sum(in_flow[k,i,j] + in_flow[k,xor(i - 1 ,(2^(j-1))) + 1,j] for k in 1:n) <= beta)
+
+	@objective(model, Min, beta)
+
+	optimize!(model)
+
+	in = value.(in_flow)
+
+	#return value(beta)
+	return (i,j) -> begin
+		matrix = [0.0 for b in 1:n, a in 1:n]
+		if j == permutation[i]
+			for k in 1:n
+				for h in 1:d
+					matrix[k,xor(k - 1,2^(h-1)) + 1] = in[i,k,h] + in[i,xor(k - 1,2^(h-1)) + 1, h]
+				end
+			end
+		end
+		return matrix
 	end
 end

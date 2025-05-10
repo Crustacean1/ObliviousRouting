@@ -26,6 +26,7 @@ Literature:
 - [ ] Dynamic vs Oblivious Routing in Network Design
 - [ ] Oblivious routing in directed graphs with random demands
 - [ ] Optimal Oblivious Routing for Structured Networks (compare to Azar LP formulation)
+- [ ] Mixing times and Lp bounds for oblivious routing
 
 Practical:
 - [ ] Oblivious Routing in IP Networks
@@ -68,6 +69,7 @@ Topics:
 ## Authors
 - Harald Racke
 - Bernhard Haeupler
+- Gupta
 
 TODOS:
 - 

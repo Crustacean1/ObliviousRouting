@@ -33,10 +33,10 @@ demand_patterns = [
 
 
 topologies = [
-  	("hypergrid-2-3", () -> hypergrid(2,3)),
 	  ("hypergrid-2-4", () -> hypergrid(2,4)),
 	  ("hypergrid-2-5", () -> hypergrid(2,5)),
 	  ("hypergrid-2-6", () -> hypergrid(2,6)),
+	  ("hypergrid-2-7", () -> hypergrid(2,7)),
 	  #("gnp 100", () -> gnp(10,0.1))
 	]
 Random.seed!(2137)
@@ -50,6 +50,8 @@ demand_data = []
 trials = 5
 header = vcat(["Topology", "Demands", "Routing"] , ["Opt. $(i)"  for i in 1:trials], ["Cong. $(i)"  for i in 1:trials])
 
+# topology, routing, demand, 
+
 for (t_name, topology) in topologies
 	graph = topology()
 
@@ -58,20 +60,24 @@ for (t_name, topology) in topologies
 		if size(graph)[1] < 20
 			optimal_congestion = [mccf(graph,d) for d in demands]
 		else
-			optimal_congestion = [(Inf,Inf) for d in demands]
+			optimal_congestion = [Inf for d in demands]
 		end
 
 		for (r_name, routing) in routings
+
 			push!(congestion_data, [])
 			for (i,d) in enumerate(demands)
 				r = routing(graph)
-        if i == 1
-          for a in 1:size(graph)[1]
-            for b in 1:size(graph)[1]
-              #draw_route(graph,a ,b ,r(a,b), "$(t_name)/$(r_name)/$(a)-$(b)")
-            end
-          end
-        end
+
+				# Route drawing
+        		if i == 1
+        		  for a in 1:size(graph)[1]
+        		    for b in 1:size(graph)[1]
+        		      #draw_route(graph,a ,b ,r(a,b), "$(t_name)/$(r_name)/$(a)-$(b)")
+        		    end
+        		  end
+        		end
+
 				assert_routing(graph, r)
 				routing_congestion = compute_congestion(graph, r, d)
 				push!(congestion_data[end], routing_congestion)
