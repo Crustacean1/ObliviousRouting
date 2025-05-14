@@ -1,60 +1,242 @@
-optimal_fraction, 1, 2, 1.0
-optimal_fraction, 2, 2, 1.0
-optimal_fraction, 3, 2, 1.0
-optimal_fraction, 4, 2, 1.0
-optimal_fraction, 5, 2, 1.0
-optimal_fraction, 6, 2, 1.0
-optimal_fraction, 7, 2, 1.0
-optimal_fraction, 8, 2, 1.0
-optimal_fraction, 9, 2, 1.0
-optimal_fraction, 10, 2, 1.0
-optimal_fraction, 1, 3, 1.0
-optimal_fraction, 2, 3, 0.8
-optimal_fraction, 3, 3, 0.7500000000000001
-optimal_fraction, 4, 3, 1.0
-optimal_fraction, 5, 3, 0.5
-optimal_fraction, 6, 3, 1.0
-optimal_fraction, 7, 3, 1.0
-optimal_fraction, 8, 3, 1.0
-optimal_fraction, 9, 3, 0.75
-optimal_fraction, 10, 3, 0.5000000000000003
-optimal_fraction, 1, 4, 1.0
-optimal_fraction, 2, 4, 1.0
-optimal_fraction, 3, 4, 1.0
-optimal_fraction, 4, 4, 0.75
-optimal_fraction, 5, 4, 0.9999999999999998
-optimal_fraction, 6, 4, 1.0
-optimal_fraction, 7, 4, 1.0000000000000002
-optimal_fraction, 8, 4, 0.75
-optimal_fraction, 9, 4, 0.5000000000000023
-optimal_fraction, 10, 4, 1.0
-optimal_fraction, 1, 5, 0.9062500000000014
-optimal_fraction, 2, 5, 0.8148885350318469
-optimal_fraction, 3, 5, 0.6929347826086959
-optimal_fraction, 4, 5, 0.7649456521739133
-optimal_fraction, 5, 5, 0.9711538461538475
-optimal_fraction, 6, 5, 0.5308886183810101
-optimal_fraction, 7, 5, 1.0
-optimal_fraction, 8, 5, 1.0
-optimal_fraction, 9, 5, 0.9441747572815535
-optimal_fraction, 10, 5, 0.5693319838056672
-optimal_fraction, 1, 6, 0.6893362435704818
-optimal_fraction, 2, 6, 0.5148383129745127
-optimal_fraction, 3, 6, 1.0
-optimal_fraction, 4, 6, 0.7258082778336918
-optimal_fraction, 5, 6, 0.6009025518851553
-optimal_fraction, 6, 6, 1.0
-optimal_fraction, 7, 6, 0.8021197112310133
-optimal_fraction, 8, 6, 0.6648055411818227
-optimal_fraction, 9, 6, 0.767452634066292
-optimal_fraction, 10, 6, 0.5900013287209095
-optimal_fraction, 1, 7, 0.9108602514999311
-optimal_fraction, 2, 7, 1.0
-optimal_fraction, 3, 7, 0.9822311350088195
-optimal_fraction, 4, 7, 0.9272672464546329
-optimal_fraction, 5, 7, 0.7760834470512619
-optimal_fraction, 6, 7, 0.5451646516176287
-optimal_fraction, 7, 7, 0.6681874318227858
-optimal_fraction, 8, 7, 0.6652194934174669
-optimal_fraction, 9, 7, 0.588307395431524
-optimal_fraction, 10, 7, 0.5266547882374578
+routing,trial,dimensions,congestion
+Optimal Fractional Routing, 1, 2, 1.0
+Optimal Fractional Routing, 2, 2, 1.0
+Optimal Fractional Routing, 3, 2, 1.0
+Optimal Fractional Routing, 4, 2, 1.0
+Optimal Fractional Routing, 5, 2, 1.0
+Optimal Fractional Routing, 6, 2, 1.0
+Optimal Fractional Routing, 7, 2, 1.0
+Optimal Fractional Routing, 8, 2, 1.0
+Optimal Fractional Routing, 9, 2, 1.0
+Optimal Fractional Routing, 10, 2, 1.0
+Optimal Fractional Routing, 1, 3, 1.0
+Optimal Fractional Routing, 2, 3, 0.8
+Optimal Fractional Routing, 3, 3, 0.7500000000000001
+Optimal Fractional Routing, 4, 3, 1.0
+Optimal Fractional Routing, 5, 3, 0.5
+Optimal Fractional Routing, 6, 3, 1.0
+Optimal Fractional Routing, 7, 3, 1.0
+Optimal Fractional Routing, 8, 3, 1.0
+Optimal Fractional Routing, 9, 3, 0.75
+Optimal Fractional Routing, 10, 3, 0.5000000000000003
+Optimal Fractional Routing, 1, 4, 1.0
+Optimal Fractional Routing, 2, 4, 1.0
+Optimal Fractional Routing, 3, 4, 1.0
+Optimal Fractional Routing, 4, 4, 0.75
+Optimal Fractional Routing, 5, 4, 0.9999999999999998
+Optimal Fractional Routing, 6, 4, 1.0
+Optimal Fractional Routing, 7, 4, 1.0000000000000002
+Optimal Fractional Routing, 8, 4, 0.75
+Optimal Fractional Routing, 9, 4, 0.5000000000000023
+Optimal Fractional Routing, 10, 4, 1.0
+Optimal Fractional Routing, 1, 5, 0.9062500000000014
+Optimal Fractional Routing, 2, 5, 0.8148885350318469
+Optimal Fractional Routing, 3, 5, 0.6929347826086959
+Optimal Fractional Routing, 4, 5, 0.7649456521739133
+Optimal Fractional Routing, 5, 5, 0.9711538461538475
+Optimal Fractional Routing, 6, 5, 0.5308886183810101
+Optimal Fractional Routing, 7, 5, 1.0
+Optimal Fractional Routing, 8, 5, 1.0
+Optimal Fractional Routing, 9, 5, 0.9441747572815535
+Optimal Fractional Routing, 10, 5, 0.5693319838056672
+Optimal Fractional Routing, 1, 6, 0.6893362435704818
+Optimal Fractional Routing, 2, 6, 0.5148383129745127
+Optimal Fractional Routing, 3, 6, 1.0
+Optimal Fractional Routing, 4, 6, 0.7258082778336918
+Optimal Fractional Routing, 5, 6, 0.6009025518851553
+Optimal Fractional Routing, 6, 6, 1.0
+Optimal Fractional Routing, 7, 6, 0.8021197112310133
+Optimal Fractional Routing, 8, 6, 0.6648055411818227
+Optimal Fractional Routing, 9, 6, 0.767452634066292
+Optimal Fractional Routing, 10, 6, 0.5900013287209095
+Optimal Fractional Routing, 1, 7, 0.9108602514999311
+Optimal Fractional Routing, 2, 7, 1.0
+Optimal Fractional Routing, 3, 7, 0.9822311350088195
+Optimal Fractional Routing, 4, 7, 0.9272672464546329
+Optimal Fractional Routing, 5, 7, 0.7760834470512619
+Optimal Fractional Routing, 6, 7, 0.5451646516176287
+Optimal Fractional Routing, 7, 7, 0.6681874318227858
+Optimal Fractional Routing, 8, 7, 0.6652194934174669
+Optimal Fractional Routing, 9, 7, 0.588307395431524
+Optimal Fractional Routing, 10, 7, 0.5266547882374578
+Direct Routing, 1, 2, 1.0
+Direct Routing, 2, 2, 2.0
+Direct Routing, 3, 2, 2.0
+Direct Routing, 4, 2, 1.0
+Direct Routing, 5, 2, 1.0
+Direct Routing, 6, 2, 2.0
+Direct Routing, 7, 2, 2.0
+Direct Routing, 8, 2, 1.0
+Direct Routing, 9, 2, 1.0
+Direct Routing, 10, 2, 1.0
+Direct Routing, 1, 3, 2.0
+Direct Routing, 2, 3, 1.0
+Direct Routing, 3, 3, 2.0
+Direct Routing, 4, 3, 3.0
+Direct Routing, 5, 3, 1.0
+Direct Routing, 6, 3, 1.0
+Direct Routing, 7, 3, 2.0
+Direct Routing, 8, 3, 2.0
+Direct Routing, 9, 3, 1.0
+Direct Routing, 10, 3, 2.0
+Direct Routing, 1, 4, 2.0
+Direct Routing, 2, 4, 2.0
+Direct Routing, 3, 4, 2.0
+Direct Routing, 4, 4, 3.0
+Direct Routing, 5, 4, 2.0
+Direct Routing, 6, 4, 2.0
+Direct Routing, 7, 4, 3.0
+Direct Routing, 8, 4, 3.0
+Direct Routing, 9, 4, 2.0
+Direct Routing, 10, 4, 2.0
+Direct Routing, 1, 5, 6.0
+Direct Routing, 2, 5, 3.0
+Direct Routing, 3, 5, 4.0
+Direct Routing, 4, 5, 4.0
+Direct Routing, 5, 5, 4.0
+Direct Routing, 6, 5, 3.0
+Direct Routing, 6, 5, 3.0
+Direct Routing, 7, 5, 4.0
+Direct Routing, 8, 5, 4.0
+Direct Routing, 9, 5, 3.0
+Direct Routing, 10, 5, 5.0
+Direct Routing, 1, 6, 4.0
+Direct Routing, 2, 6, 7.0
+Direct Routing, 3, 6, 4.0
+Direct Routing, 4, 6, 6.0
+Direct Routing, 5, 6, 5.0
+Direct Routing, 6, 6, 5.0
+Direct Routing, 7, 6, 4.0
+Direct Routing, 8, 6, 4.0
+Direct Routing, 9, 6, 6.0
+Direct Routing, 10, 6, 5.0
+Direct Routing, 1, 7, 7.0
+Direct Routing, 2, 7, 7.0
+Direct Routing, 3, 7, 9.0
+Direct Routing, 4, 7, 8.0
+Direct Routing, 5, 7, 6.0
+Direct Routing, 6, 7, 7.0
+Direct Routing, 7, 7, 6.0
+Direct Routing, 8, 7, 8.0
+Direct Routing, 9, 7, 11.0
+Direct Routing, 10, 7, 9.0
+Valiant Routing, 1, 2, 2.0
+Valiant Routing, 2, 2, 2.0
+Valiant Routing, 3, 2, 1.0
+Valiant Routing, 4, 2, 2.0
+Valiant Routing, 5, 2, 2.0
+Valiant Routing, 6, 2, 1.0
+Valiant Routing, 7, 2, 1.0
+Valiant Routing, 8, 2, 2.0
+Valiant Routing, 9, 2, 2.0
+Valiant Routing, 10, 2, 2.0
+Valiant Routing, 1, 3, 3.0
+Valiant Routing, 2, 3, 3.0
+Valiant Routing, 3, 3, 2.0
+Valiant Routing, 4, 3, 2.0
+Valiant Routing, 5, 3, 3.0
+Valiant Routing, 6, 3, 3.0
+Valiant Routing, 7, 3, 3.0
+Valiant Routing, 8, 3, 3.0
+Valiant Routing, 9, 3, 2.0
+Valiant Routing, 10, 3, 3.0
+Valiant Routing, 1, 4, 4.0
+Valiant Routing, 2, 4, 3.0
+Valiant Routing, 3, 4, 3.0
+Valiant Routing, 4, 4, 3.0
+Valiant Routing, 5, 4, 3.0
+Valiant Routing, 6, 4, 4.0
+Valiant Routing, 7, 4, 2.0
+Valiant Routing, 8, 4, 5.0
+Valiant Routing, 9, 4, 3.0
+Valiant Routing, 10, 4, 4.0
+Valiant Routing, 1, 5, 3.0
+Valiant Routing, 2, 5, 4.0
+Valiant Routing, 3, 5, 5.0
+Valiant Routing, 4, 5, 4.0
+Valiant Routing, 5, 5, 4.0
+Valiant Routing, 6, 5, 3.0
+Valiant Routing, 7, 5, 4.0
+Valiant Routing, 8, 5, 3.0
+Valiant Routing, 9, 5, 4.0
+Valiant Routing, 10, 5, 4.0
+Valiant Routing, 1, 6, 4.0
+Valiant Routing, 2, 6, 4.0
+Valiant Routing, 3, 6, 4.0
+Valiant Routing, 4, 6, 4.0
+Valiant Routing, 5, 6, 4.0
+Valiant Routing, 6, 6, 4.0
+Valiant Routing, 7, 6, 6.0
+Valiant Routing, 8, 6, 4.0 
+Valiant Routing, 9, 6, 4.0
+Valiant Routing, 10, 6, 4.0
+Valiant Routing, 1, 7, 4.0
+Valiant Routing, 2, 7, 5.0
+Valiant Routing, 3, 7, 5.0
+Valiant Routing, 4, 7, 5.0
+Valiant Routing, 5, 7, 4.0
+Valiant Routing, 6, 7, 5.0
+Valiant Routing, 7, 7, 5.0
+Valiant Routing, 8, 7, 5.0
+Valiant Routing, 9, 7, 5.0
+Valiant Routing, 10, 7, 5.0
+Random Tree Routing, 1, 2, 1.0
+Random Tree Routing, 2, 2, 1.0
+Random Tree Routing, 3, 2, 1.5
+Random Tree Routing, 4, 2, 1.5
+Random Tree Routing, 5, 2, 1.0
+Random Tree Routing, 6, 2, 1.0
+Random Tree Routing, 7, 2, 1.5
+Random Tree Routing, 8, 2, 1.0
+Random Tree Routing, 9, 2, 1.5
+Random Tree Routing, 10, 2, 1.0
+Random Tree Routing, 1, 3, 1.6666666666666665
+Random Tree Routing, 2, 3, 1.9999999999999998
+Random Tree Routing, 3, 3, 1.6666666666666665
+Random Tree Routing, 4, 3, 3.0
+Random Tree Routing, 5, 3, 2.6666666666666665
+Random Tree Routing, 6, 3, 2.0
+Random Tree Routing, 7, 3, 2.333333333333333
+Random Tree Routing, 8, 3, 2.3333333333333335
+Random Tree Routing, 9, 3, 2.333333333333333
+Random Tree Routing, 10, 3, 1.3333333333333333
+Random Tree Routing, 1, 4, 3.25
+Random Tree Routing, 2, 4, 2.75
+Random Tree Routing, 3, 4, 2.75
+Random Tree Routing, 4, 4, 3.5
+Random Tree Routing, 5, 4, 2.5
+Random Tree Routing, 6, 4, 2.5
+Random Tree Routing, 7, 4, 3.0
+Random Tree Routing, 8, 4, 2.25
+Random Tree Routing, 9, 4, 2.75
+Random Tree Routing, 10, 4, 2.75
+Random Tree Routing, 1, 5, 4.4
+Random Tree Routing, 2, 5, 4.600000000000001
+Random Tree Routing, 3, 5, 4.000000000000001
+Random Tree Routing, 4, 5, 4.200000000000001
+Random Tree Routing, 5, 5, 5.600000000000001
+Random Tree Routing, 6, 5, 4.800000000000002
+Random Tree Routing, 7, 5, 5.200000000000002
+Random Tree Routing, 8, 5, 3.2000000000000006
+Random Tree Routing, 9, 5, 4.800000000000001
+Random Tree Routing, 10, 5, 3.000000000000001
+Random Tree Routing, 1, 6, 6.666666666666669
+Random Tree Routing, 2, 6, 7.333333333333336
+Random Tree Routing, 3, 6, 6.500000000000002
+Random Tree Routing, 4, 6, 6.500000000000002
+Random Tree Routing, 5, 6, 7.333333333333336
+Random Tree Routing, 6, 6, 7.166666666666668
+Random Tree Routing, 7, 6, 7.0
+Random Tree Routing, 8, 6, 6.5
+Random Tree Routing, 9, 6, 8.166666666666668
+Random Tree Routing, 10, 6, 6.666666666666668
+Random Tree Routing, 1, 7, 12.285714285714285
+Random Tree Routing, 2, 7, 11.28571428571429
+Random Tree Routing, 3, 7, 9.142857142857148
+Random Tree Routing, 4, 7, 11.14285714285714
+Random Tree Routing, 5, 7, 10.71428571428572
+Random Tree Routing, 6, 7, 10.42857142857143
+Random Tree Routing, 7, 7, 10.428571428571432
+Random Tree Routing, 8, 7, 10.285714285714288
+Random Tree Routing, 9, 7, 11.42857142857143
+Random Tree Routing, 10, 7, 12.571428571428571
