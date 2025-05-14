@@ -106,7 +106,7 @@ function route_to_flow(path_matrix, src, dst)
 	return flow
 end
 
-function assert_routing(graph, routing)
+function assert_routing(graph, demands, routing)
 	n = size(graph)[1]
 	epsilon = 0.0001
 
@@ -117,12 +117,12 @@ function assert_routing(graph, routing)
 				total = sum(flow[k,:]) - sum(flow[:,k])
 				if (
 					(i == j) || 
-					(k == j && abs(total + 1) < epsilon) ||
-					(k == i && abs(total - 1) < epsilon) ||
-					(abs(total) < epsilon ))# && k != j && k != i))
+					(k == j && abs(total - demands[i,j]) < epsilon) ||
+					(k == i && abs(total + demands[i,j]) < epsilon) ||
+					((abs(total) < epsilon) &&  k != j && k != i))
 				else
 					println("Invalid flow for ", k)
-					println("Flow ",i ," ", j," ", k," ", total)
+					println("Flow ",i ," ", j," ", k," ", total, " ", sum(flow[:,k])," ", demands[i,j], " ", demands[j,i])
 					display(flow)
 					error("Invalid flow")
 				end

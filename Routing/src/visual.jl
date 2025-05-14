@@ -10,19 +10,21 @@ function draw_route(graph, src, dst, route, file)
 
   @svg begin
   	background("black")
-  	fontsize(25)
+  	fontsize(15)
   
   	drawgraph(_graph,layout=stress,vertexlabels=1:nv(_graph),
-        vertexshapesizes=[25],
+		margin=100,
+        vertexshapesizes=[15],
   		  vertexfillcolors=colors,
   		  edgestrokecolors=colorant"gray50",
-        edgestrokeweights=(_,src,dst,_,_) -> graph[src,dst] * 10)
+        edgestrokeweights=(_,src,dst,_,_) -> graph[src,dst] * 2)
     @layer begin
   	  drawgraph(_tree,layout=stress,vertexlabels=1:nv(_tree),
-          vertexshapesizes=[25],
+		margin=100,
+          vertexshapesizes=[15],
           vertexfillcolors=colors,
   	  	  edgestrokecolors=colorant"red",
-               edgestrokeweights=(_,src,dst,_,_) -> (route[src,dst] + route[dst,src])* 8)
+               edgestrokeweights=(_,src,dst,_,_) -> (route[src,dst] + route[dst,src])* 1)
     end
-  end 1000 1000 "$(file).svg"
+  end 10000 10000 "$(file).svg"
 end

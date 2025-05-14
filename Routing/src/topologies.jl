@@ -44,13 +44,13 @@ function gnp(n, p)
 	for i in 1:n
 		for j in 1:n
 			if rand(Uniform(0,1)) < p && i != j
-				adj[j,i] = adj[i,j] = rand(Uniform(1,5))
+				adj[j,i] = adj[i,j] = 1# rand(Uniform(1,5))
 			end
 		end
 	end
 
 	for (i,j) in edges 
-		adj[i,j] = adj[j,i] = rand(Uniform(1,5))
+		#adj[i,j] = adj[j,i] = 1#rand(Uniform(1,5))
 	end
 
 	return adj
