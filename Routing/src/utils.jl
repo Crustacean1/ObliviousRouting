@@ -176,5 +176,7 @@ function uniform_random_tree(graph)
     outside = filter(x -> !(x in tree_nodes), outside)
     #println("Outside: ", outside)
   end
-  return edges_to_graph(edges, n)
+  tree = edges_to_graph(edges, n)
+  assert_tree(graph,tree)
+  return tree
 end

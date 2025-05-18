@@ -7,9 +7,10 @@ include("visual.jl")
 
 Random.seed!(2138)
 
-function get_stretch(graph, weight, tree)
-	(distances,_) = floyd_warshall(tree)
-	sum()
+function avg_stretch(graph, weight, tree)
+	(distances,_) = floyd_warshall(graph) 
+	(tree_distances,_) = floyd_warshall(tree) 
+	return sum(tree_distances .* weight) / sum(distances .* weight) 
 end
 
 function get_clusters(graph)
@@ -36,22 +37,38 @@ function get_clusters(graph)
 	return graph[clusters.==maxim,clusters.==maxim]
 end
 
-n = 1000
+function get_min_stretch_tree(graph, weight)
+	(partition, centers) = avg_spanning_tree(graph,weight)
+	println("Partition")
+	display(partition)
+	#tree = cut_tree_to_spanning_tree(graph,partition)
+	return tree
+end
 
-graph = gnp(n, 2/n)
+n = 500
+
+graph = gnp(n, 1/n)
 graph = get_clusters(graph)
 
 n = size(graph,1)
 
 distances, _ = floyd_warshall(graph)
+println("Diameter: ", maximum(distances))
 
 route = [0 for i in 1:n, j in 1:n]
 
-for i in 1:1
-	global route += uniform_random_tree(graph)
-end
+weight = [graph[i,j] != 0 ? 1 : 0 for i in 1:n, j in 1:n]
+trees = [uniform_random_tree(graph) for i in 1:100]
+stretch = [avg_stretch(graph,weight, tree) for tree in trees]
 
-draw_route(graph, -1, -1, route, "test")
+min_tree = get_min_stretch_tree(graph, weight)
+
+println("Possible distances: ", get_possible_sizes(graph))
+println("Exp: ", get_diameter_exp(graph))
+
+println("Average stretch $(sum(stretch)/size(stretch,1)) $(avg_stretch(graph, weight, graph))")
+
+#draw_route(graph, -1, -1, tree1, "test")
 
 #graph_size = size(graph)[1]
 #

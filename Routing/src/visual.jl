@@ -17,7 +17,7 @@ function draw_route(graph, src, dst, route, file)
         vertexshapesizes=[15],
   		  vertexfillcolors=colors,
   		  edgestrokecolors=colorant"gray50",
-        edgestrokeweights=(_,src,dst,_,_) -> graph[src,dst] * 2)
+        edgestrokeweights=(_,src,dst,_,_) -> graph[src,dst] * 3)
     @layer begin
   	  drawgraph(_tree,layout=stress,vertexlabels=1:nv(_tree),
 		margin=100,

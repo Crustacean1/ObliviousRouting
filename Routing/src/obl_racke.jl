@@ -13,57 +13,72 @@ function cut_cluster(cluster, distances, pi, beta)
   return reduced
 end
 
-function frt_edge_expectation(graph, weights, distances, beta, perm, edge, level)
-	n = size(graph)[1]
+function frt_edge_expectation(graph, weights, distances, beta, edge, level)
+	n = size(graph,1)
 	beta_i = beta * (2 ^ level)
 	(u,v) = edge
 	u_distances = distances[u,:]
 	v_distances = distances[v,:]
-	#println("Edge function ", edge, " beta: ", beta_i)
 
 	# Find settling centers
 	settling = [i for i in 1:n if u_distances[i] < beta_i  || v_distances[i] < beta_i]
 	# Find cutting centers
 	cutting = [i for i in 1:n if (u_distances[i] < beta_i && v_distances[i] > beta_i) || (u_distances[i] > beta_i && v_distances[i] < beta_i)]
 
-	@assert size(settling)[1] >= size(cutting)[1]
+	#@assert size(settling)[1] >= size(cutting)[1]
 
-	if (!isempty(intersect(settling, perm)))
-		return 0
-	else
-		# Tree expanded path  times probability of being cut at this level
-		return weights[u,v] * (2^(level+2)) * size(cutting)[1]/size(settling)[1]
-	end
+	return weights[u,v] * (2^(level+2)) * size(cutting)[1]/size(settling)[1]
 end
 
 function frt_expectation(graph, weights, distances, beta, perm)
 	n = size(graph)[1]
 	delta = ceil(log(2,maximum(distances)))
-	#println("Delta: ", delta)
 
 	edges = [(i,j) for i in 1:n, j in 1:n if graph[i,j] != 0 && i > j ]
-	#display(distances)
-	#display(edges)
-	result = sum([frt_edge_expectation(graph, weights, distances, beta, perm, edge, level)] for edge in edges, level in 1:delta)
-	#println("Expected cost: ", result)
-	return result
+
+	settles_u = (e, p, l) -> (distances[p,e[1]] < beta * 2 ^ l)
+	settles_v = (e, p, l) -> (distances[p,e[2]] < beta * 2 ^ l)
+
+	settled = [(l,e) for l in 1:delta, e in edges if any(p -> (settles_u(e,p,l) || settles_v(e,p,l)),perm)]
+	cut 	= [(l,e) for l in 1:delta, p in perm, e in edges if	any(p -> xor(settles_u(e,p,l), settles_v(e,p,l)), perm)]
+	unknown = [(l,e) for l in 1:delta, e in edges if !any(p -> (settles_u(e,p,l) || settles_v(e,p,l)), perm)]
+
+	known_cost = sum([weights[e[1],e[2]] * 2 ^ (l+2) for (l,e) in cut])
+	expected_cost = sum(frt_edge_expectation(graph, weights, distances, beta, edge, level) for (level, edge) in unknown; init = 0)
+	total = known_cost + expected_cost
+	return total
 end
 
-function avg_spanning_tree(graph, weights, distances)
+function get_diameter_exp(graph)
+	(distances, _) = floyd_warshall(graph)
+	return 2^ceil(Integer, log(2,maximum(distances)))
+end
+
+function get_possible_sizes(graph)
+	(distances, _) = floyd_warshall(graph)
+	distances = reshape(distances,:)
+	return sort(collect(Set([(i + j) / 2  for (i,j) in zip(distances, distances[2:end])])))
+end
+
+function avg_spanning_tree(graph, weights)
+	(distances,_) = floyd_warshall(graph)
 	# Find best beta based on conditional expectations
-	betas = [1.0,1.1,1.2,1.3,1.4,1.5,1.6,1.7,1.8,1.9]
-	(val,beta) = findmin(map(beta -> frt_expectation(graph, weights, distances, beta, []), betas))
-	println("Optimal beta: ", beta, " with value: ", val);
+	diameter = get_diameter_exp(graph)
+	betas = get_possible_sizes(graph)  ./ diameter
+	println("Betas: ", betas)
+	test = findmin(map(beta -> frt_expectation(graph, weights, distances, beta, []), betas))
+	println("Optimal beta: ", test, " with value: ", betas);
 	free = collect(1:n)
 	settled = []
+	beta = 1
 
 	for i in 1:n
-		(_,j) = findmax(map(center -> frt_expectation(graph, weights, distances, beta, vcat(settled, center)), free))
+		(maxval,j) = findmax(map(center -> frt_expectation(graph, weights, distances, beta, vcat(settled, center)), free))
 		push!(settled,  free[j])
 		deleteat!(free, j)
 	end
 
-	#println("Spanning tree: ", beta, " ; ", settled," ; ", free)
+	println("Spanning tree: ", beta, " ; ", settled," ; ", free)
 	return frt_decomposition(graph, distances, beta, settled)
 end
 
@@ -88,14 +103,11 @@ function frt_decomposition(graph, distance_matrix, beta, pi)
 	n = size(graph)[1]
 
 	Delta = log(2,maximum(distance_matrix))
-	println("Delta: ", Delta)
   	D = [[collect(1:n)]]
-  	Controls = [[]]
-
-  	#display(D)
+	Controls = [[pi[1]]]
 
   	while any([size(cluster)[1] != 1 for cluster in D[end]])
-		  delta = Delta - 1 - size(D)[1]
+		delta = Delta - 1 - size(D)[1]
 
     	d = vcat([cut_cluster(c, distance_matrix, pi, beta * (2.0 ^ delta)) for c in D[end]]...)
     	centers = vcat([pi for _ in D[end]]...)
@@ -133,8 +145,8 @@ end
 function cut_tree_to_spanning_tree(graph, layers)
   n = size(graph)[1]
 
-  #println("Layers")
-  #display(layers)
+  println("Layers")
+  display(layers)
   if size(layers)[1] == 0
     return  []
   end
@@ -158,9 +170,6 @@ function cut_tree_to_spanning_tree(graph, layers)
   end
 
   return edges
-end
-
-function cost_of_decomposition(graph, weights, decomposition)
 end
 
 function mcct(graph)
