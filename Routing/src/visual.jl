@@ -26,5 +26,5 @@ function draw_route(graph, src, dst, route, file)
   	  	  edgestrokecolors=colorant"red",
                edgestrokeweights=(_,src,dst,_,_) -> (route[src,dst] + route[dst,src])* 1)
     end
-  end 10000 10000 "$(file).svg"
+  end 1000 1000 "$(file).svg"
 end

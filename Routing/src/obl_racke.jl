@@ -1,16 +1,7 @@
-function cut_cluster(cluster, distances, pi, beta)
-  println("Beta: ", beta)
-  clustered = [[i for i in cluster if distances[p,i] < beta] for p in pi]
-  total = []
-
-  reduced = []
-  for c in clustered
-    d = [i for i in c if !(i in total)]
-    total = vcat(total, d)
-    push!(reduced, d)
-  end
-
-  return reduced
+function cut_cluster(distances, pi, beta)
+	n = size(distances,1)
+	display(pi)
+	return [pi[findfirst(x -> distances[v,x] < beta, pi)] for v in 1:n]
 end
 
 function frt_edge_expectation(graph, weights, distances, beta, edge, level)
@@ -24,8 +15,6 @@ function frt_edge_expectation(graph, weights, distances, beta, edge, level)
 	settling = [i for i in 1:n if u_distances[i] < beta_i  || v_distances[i] < beta_i]
 	# Find cutting centers
 	cutting = [i for i in 1:n if (u_distances[i] < beta_i && v_distances[i] > beta_i) || (u_distances[i] > beta_i && v_distances[i] < beta_i)]
-
-	#@assert size(settling)[1] >= size(cutting)[1]
 
 	return weights[u,v] * (2^(level+2)) * size(cutting)[1]/size(settling)[1]
 end
@@ -46,6 +35,7 @@ function frt_expectation(graph, weights, distances, beta, perm)
 	known_cost = sum([weights[e[1],e[2]] * 2 ^ (l+2) for (l,e) in cut])
 	expected_cost = sum(frt_edge_expectation(graph, weights, distances, beta, edge, level) for (level, edge) in unknown; init = 0)
 	total = known_cost + expected_cost
+
 	return total
 end
 
@@ -79,6 +69,7 @@ function avg_spanning_tree(graph, weights)
 	end
 
 	println("Spanning tree: ", beta, " ; ", settled," ; ", free)
+	println("Permutation: ", settled)
 	return frt_decomposition(graph, distances, beta, settled)
 end
 
@@ -106,18 +97,9 @@ function frt_decomposition(graph, distance_matrix, beta, pi)
   	D = [[collect(1:n)]]
 	Controls = [[pi[1]]]
 
-  	while any([size(cluster)[1] != 1 for cluster in D[end]])
-		delta = Delta - 1 - size(D)[1]
+	layers = [cut_cluster(distance_matrix, pi, beta * (2.0 ^ delta)) for delta in reverse(0:Delta+1)]
 
-    	d = vcat([cut_cluster(c, distance_matrix, pi, beta * (2.0 ^ delta)) for c in D[end]]...)
-    	centers = vcat([pi for _ in D[end]]...)
-
-    	e = (!isempty).(d)
-    	D = vcat(D, [d[e]])
-    	Controls = vcat(Controls, [centers[e]])
-	end
-
-	return D,Controls
+	return layers
 end
 
 function cluster_connection(graph, assigned, unassigned)
@@ -142,34 +124,24 @@ function cluster_connection(graph, assigned, unassigned)
   return (assigned, unassigned, (dind, cind))
 end
 
-function cut_tree_to_spanning_tree(graph, layers)
-  n = size(graph)[1]
+function cut_tree_to_spanning_tree(graph, partitions)
+  	n = size(graph)[1]
+	(_,sp) = floyd_warshall(graph)
 
-  println("Layers")
-  display(layers)
-  if size(layers)[1] == 0
-    return  []
-  end
-  edges = []
+	all = Set(Iterators.flatten([[(i,j) for (i,j) in zip(a,b)] for (a,b) in collect(zip(partitions, partitions[2:end]))[1:2]]))
 
-  assigned = layers[1][1]
-  unassigned = collect(Iterators.drop(layers[1],1))
+	paths = [get_path(i,j,sp) for (i,j) in all]
 
-  # Connect the clusters via single link
-  cluster_size = size(collect(Iterators.flatten(layers[1])))[1]
-  while size(assigned)[1] != cluster_size
-    assigned, unassigned, edge = cluster_connection(graph, assigned, unassigned)
-    println("Found  $(cluster_size) to $(size(assigned)[1]) edge $(size(layers)[1]): ", edge, " " , assigned," ", unassigned)
-    edges = vcat(edges, edge)
-  end
+	tree = [0 for i in 1:n, j in 1:n]
 
-  # Repeat recursively for subclusters
-  for cluster in layers[1]
-    sublayers = Iterators.drop(map(layer -> filter(x -> size(intersect(x,cluster))[1] == size(x)[1],layer), layers),1)
-    edges = vcat(edges, cut_tree_to_spanning_tree(graph, collect(sublayers)))
-  end
+	for path in paths
+		for (u,v) in zip(path, path[2:end])
+			tree[u,v] = 1
+			tree[v,u] = 1
+		end
+	end
 
-  return edges
+	return tree
 end
 
 function mcct(graph)

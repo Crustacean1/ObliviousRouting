@@ -18,7 +18,7 @@ Literature:
 - [-] Approximate max-flow min- (multi) cut theorems and their applications* 
 - [-] Breaking the VLB Barrier for Oblivious Reconfigurable Networks, Wilson
 - [-] Polylog-Competitive Deterministic Local Routing and Scheduling
-- [x] Oblivious Network Design
+- [x] !Oblivious Network Design
 - [x] Optimal Hierarchical Decompositions for Congestion Minimization in Networks H. Racke
     - Sequential and Parallel Algorithms for Mixed Packing and Covering (Young)
 - [x] Universal schemes for parallel communication
@@ -27,6 +27,7 @@ Literature:
 - [ ] Oblivious routing in directed graphs with random demands
 - [ ] Optimal Oblivious Routing for Structured Networks (compare to Azar LP formulation)
 - [ ] Mixing times and Lp bounds for oblivious routing
+- !!! Oblivious Routing via Random Walks
 
 Practical:
 - [ ] Oblivious Routing in IP Networks
@@ -47,6 +48,11 @@ To Check:
 - [ ] Approximation Algorithms for Network Design in Non-Uniform Fault Models
 - [ ] Oblivious routing for fat-tree based system area networks with uncertain traffic demands
 
+Valiant:
+- [article] Path-Based, Randomized, Oblivious, Minimal Routing
+- Deadlock?
+- Minimal routing
+
 Interesting topologies:
 - Grid
 - Hypercube
@@ -60,8 +66,8 @@ Topics:
 - Metric approximation of a graph
 - Permutation/sorting networks
 - Duality and relaxation, particularly the kind shown in APPROXIMATE MAX-FLOW... where it is used to construct growing algorithm
-- Vatcher's sorting networks
-- d-way shuffle
+- Batcher's sorting networks
+- [*] d-way shuffle important!
 - [x] buy-at-bulk or rent-or-buy network design / monotonicity
 - Monotone subadditive functions
 - oblivious Steiner forest problem
@@ -71,10 +77,36 @@ Topics:
 - Bernhard Haeupler
 - Gupta
 
+## adaptive routing lit 
+- Mention of ad-hoc protocols
+- Load-balanced wireless ad hoc routing
+
+## Valiant
+- DOR (dimension order routing)
+
 TODOS:
-- 
+- Mention PoA
+## Adaptive routing protocols
+- MTCP? (not a routing protocol)
+- CONGA (not a routing protocol)
+- UGAL (wierd combination of valiant and min routing)
+- [article] Modeling Universal Globally Adaptive Load-Balanced Routing
+- Backpressure algorithm!
+- Virtual channel concept?
+- Demands-aware routing
+## Topologies
+- Hypercube
 
 # Structure
 ## Introduction
 ## Methods overview
 
+## Appendix
+- random tree generation
+
+## Experiments
+- comparision of routing under different demands
+    - Permutation
+    - h-relation
+    - random
+    - any other?
