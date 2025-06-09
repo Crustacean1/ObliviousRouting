@@ -51,6 +51,7 @@ To Check:
 Valiant:
 - [article] Path-Based, Randomized, Oblivious, Minimal Routing
 - Deadlock?
+- head of line issues with different paths ()
 - Minimal routing
 
 Interesting topologies:

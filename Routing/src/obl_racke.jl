@@ -1,6 +1,6 @@
 function cut_cluster(distances, pi, beta)
 	n = size(distances,1)
-	display(pi)
+	#display(pi)
 	return [pi[findfirst(x -> distances[v,x] < beta, pi)] for v in 1:n]
 end
 
@@ -55,9 +55,9 @@ function avg_spanning_tree(graph, weights)
 	# Find best beta based on conditional expectations
 	diameter = get_diameter_exp(graph)
 	betas = get_possible_sizes(graph)  ./ diameter
-	println("Betas: ", betas)
+	#println("Betas: ", betas)
 	test = findmin(map(beta -> frt_expectation(graph, weights, distances, beta, []), betas))
-	println("Optimal beta: ", test, " with value: ", betas);
+	#println("Optimal beta: ", test, " with value: ", betas);
 	free = collect(1:n)
 	settled = []
 	beta = 1
@@ -68,8 +68,8 @@ function avg_spanning_tree(graph, weights)
 		deleteat!(free, j)
 	end
 
-	println("Spanning tree: ", beta, " ; ", settled," ; ", free)
-	println("Permutation: ", settled)
+	#println("Spanning tree: ", beta, " ; ", settled," ; ", free)
+	#println("Permutation: ", settled)
 	return frt_decomposition(graph, distances, beta, settled)
 end
 
@@ -80,13 +80,13 @@ function frt_normalization(graph, distances)
   	Delta = round_to_power(e_max / min(e_min,1.0))
   	scaling = (2 ^ Delta) / e_max
 
-	println("Scaling: ", scaling)
+	#println("Scaling: ", scaling)
 	display(graph)
 	graph2 = graph .* scaling
 	distances2 = distances .* scaling
 	distinct_distances = distinct_distances .* scaling
 
-	println("Normalized graph to: ", minimum(distinct_distances)," --- ", maximum(distinct_distances))
+	#println("Normalized graph to: ", minimum(distinct_distances)," --- ", maximum(distinct_distances))
 	return (graph2, distances2)
 end
 

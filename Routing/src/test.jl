@@ -8,49 +8,76 @@ include("visual.jl")
 Random.seed!(2138)
 
 function avg_stretch(graph, weight, tree)
-	(distances,_) = floyd_warshall(graph) 
-	(tree_distances,_) = floyd_warshall(tree) 
-	return sum(tree_distances .* weight) / sum(distances .* weight) 
+    (distances, _) = floyd_warshall(graph)
+    (tree_distances, _) = floyd_warshall(tree)
+    return sum(tree_distances .* weight) / sum(distances .* weight)
 end
 
 function get_clusters(graph)
-	n = size(graph,1)
-	clusters = collect(1:n)
-	for j in 1:n
-		for i in 2:n
-			pos = Iterators.peel(Iterators.filter(x -> x[1] != clusters[i] && x[2] !=0, zip(clusters,graph[i,:])))
-			if pos != nothing
-				if clusters[i] > pos[1][1]
-					clusters[i] = pos[1][1]
-				end
-			end
-		end
-	end
+    n = size(graph, 1)
+    clusters = collect(1:n)
+    for j in 1:n
+        for i in 2:n
+            pos = Iterators.peel(Iterators.filter(x -> x[1] != clusters[i] && x[2] != 0, zip(clusters, graph[i, :])))
+            if pos != nothing
+                if clusters[i] > pos[1][1]
+                    clusters[i] = pos[1][1]
+                end
+            end
+        end
+    end
 
-	maxval = [0 for i in 1:n]
-	for i in 1:n
-		maxval[clusters[i]] += 1
-	end
+    maxval = [0 for i in 1:n]
+    for i in 1:n
+        maxval[clusters[i]] += 1
+    end
 
-	maxim = argmax(maxval)
+    maxim = argmax(maxval)
 
-	return graph[clusters.==maxim,clusters.==maxim]
+    return graph[clusters.==maxim, clusters.==maxim]
+end
+
+function to_decomposition_tree(decomposition)
+    new_partition = []
+    partitioning = decomposition[1]
+    total = 0
+    for i in 1:size(decomposition, 1)
+        partitioning = zip(partitioning, decomposition[i])
+        unique = collect(Set(partitioning))
+        #println("Layer $i $unique $partitioning")
+
+        partitioning = map(m -> total + findfirst(==(m), unique), partitioning)
+        total = maximum(partitioning)
+
+        push!(new_partition, partitioning)
+    end
+    routing_matrix = [0 for i in 1:total, j in 1:total]
+
+    for i in 1:size(new_partition, 1)-1
+        for j in 1:size(partitioning, 1)
+			routing_matrix[new_partition[i][j], new_partition[i+1][j]] = routing_matrix[new_partition[i+1][j], new_partition[i][j] ] = size(new_partition,1) - i
+        end
+    end
+	display(routing_matrix)
+
+    display(new_partition)
+	return routing_matrix
 end
 
 function get_min_stretch_tree(graph, weight)
-	partition = avg_spanning_tree(graph,weight)
-	println("Partition")
-	display(partition)
-	tree = cut_tree_to_spanning_tree(graph,partition)
-	return tree
+    partition = avg_spanning_tree(graph, weight)
+    println("Partition")
+    display(partition)
+    tree = cut_tree_to_spanning_tree(graph, partition)
+    return tree
 end
 
-n = 20
+n = 50
 
-graph = gnp(n, 2/n)
+graph = gnp(n, 1 / n)
 graph = get_clusters(graph)
 
-n = size(graph,1)
+n = size(graph, 1)
 
 distances, _ = floyd_warshall(graph)
 println("Diameter: ", maximum(distances))
@@ -59,8 +86,8 @@ route = [0 for i in 1:n, j in 1:n]
 
 trees = [uniform_random_tree(graph) for i in 1:20]
 
-weight = [graph[i,j] != 0 ? 1 : 0 for i in 1:n, j in 1:n]
-stretch = [avg_stretch(graph,weight, tree) for tree in trees]
+weight = [graph[i, j] != 0 ? 1 : 0 for i in 1:n, j in 1:n]
+stretch = [avg_stretch(graph, weight, tree) for tree in trees]
 println("Treez: ", stretch)
 
 
@@ -69,10 +96,10 @@ println("Exp: ", get_diameter_exp(graph))
 
 println("Average stretch $(sum(stretch)/size(stretch,1)) $(avg_stretch(graph, weight, graph))")
 
-min_tree = get_min_stretch_tree(graph, weight)
-draw_route(graph, -1, -1, min_tree, "test")
-println("Tree")
-display(min_tree)
+decomposition = avg_spanning_tree(graph, weight)
+display(decomposition)
+dec_tree = to_decomposition_tree(decomposition)
+draw_route(dec_tree, -1, -1, dec_tree, "test")
 
 
 #graph_size = size(graph)[1]
