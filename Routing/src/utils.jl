@@ -1,3 +1,4 @@
+using Random
 using LinearAlgebra
 
 function permutation(n)
