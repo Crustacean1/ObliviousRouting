@@ -1,0 +1,17 @@
+- [ ] Expand part about internet protocols
+- [ ] Make graph definition more visible
+- [ ] Add glossary
+- [x] Add problem definitions
+- [x] Protocols comparision
+- [ ] Expand section about l_p norms
+- [x] Fix Racke section
+- [ ] Fix error in part about 2 phase hose
+- [x] Add conclusion
+- [ ] Add congestion for simulator
+- [ ] Double check FRT algorithm for duplicate nodes
+- [ ] Expand and double check subadditive norms
+- [ ] Add section about adaptive algorithms from racke's survey
+- [ ] Improve drawing
+- [x] Add citing to bellman-ford
+- [x] Add citing to Hoeffding
+- [x] Improve timeline

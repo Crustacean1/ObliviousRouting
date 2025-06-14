@@ -1,5 +1,6 @@
 using Statistics
 using LinearAlgebra
+using StatsBase
 
 
 include("./topologies.jl")
@@ -111,7 +112,13 @@ function get_packet_dilation(trace)
     return dilations
 end
 
-function get_packet_ct()
+function get_packet_ct(trace)
+    p = size(trace, 2)
+    hops = Iterators.flatten([map(x -> x[1] > x[2] ? (x[1], x[2]) : (x[2], x[1]), Iterators.filter(x -> x[1] != x[2], zip(trace[1:end, i], trace[2:end, i]))) for i in 1:p])
+    mean_congestion = mean(values(countmap(hops)))
+    #println("Sum: ", sum(values(countmap(hops))))
+    #println("Hops: ", mean(values(countmap(hops))))
+    return mean_congestion
 end
 
 function average_packet_waiting_time()
@@ -125,12 +132,13 @@ for n in 5:15
         strategies = zip([create_dor, create_valiant, create_impr_valiant], ["DOR", "VALIANT", "VOCK"])
         for (strategy, j) in strategies
             open("hypercube.$i.$j.txt", "a") do file
-				println("Doing $i $j")
+                println("Doing $i $j")
                 for k in 1:10
                     Random.seed!(2137 + k)
                     trace = network_simulation(topology, perm, strategy)
                     dilation = get_packet_dilation(trace)
-                    write(file, "$n\t$i\t$j\t$(size(trace,1))\t$(mean(dilation))\n")
+                    congestion = get_packet_ct(trace)
+                    write(file, "$n\t$i\t$j\t$(size(trace,1))\t$(mean(dilation))\t$(congestion)\n")
                     flush(file)
                 end
             end

@@ -1,4 +1,5 @@
-set terminal tikz color
+#set terminal tikz color
+set terminal png size 800,1200
 
 set xlabel "Dimensions"
 set ylabel "Completion time"
@@ -9,40 +10,121 @@ set style line 3 lc rgb '#770000F0' pt 9   # triangle
 
 set key right bottom
 
-stats 'Routing/hypercube.random.DOR.txt' using 1:4 nooutput
-stats 'Routing/hypercube.random.VALIANT.txt' using 1:4 nooutput
-stats 'Routing/hypercube.random.VOCK.txt' using 1:4 nooutput
+set output 'hypercube_total.png'
+set multiplot layout 3,2
 
-set output 'random_hypercube_completion.tex'
-set title 'Random Permutation in Hypercube [10 trials]'
+set title 'Random'
+unset key
+
+f(x) = a*x + b
+fit f(x) 'Routing/hypercube.random.DOR.txt' using 1:4 via a,b
+
+g(x) = a1*x + b1
+fit g(x) 'Routing/hypercube.random.VALIANT.txt' using 1:4 via a1,b1
+
+h(x) = a2*x + b2
+fit h(x) 'Routing/hypercube.random.VOCK.txt' using 1:4 via a2,b2
 
 plot 'Routing/hypercube.random.DOR.txt' using 1:4 title "DOR" w p ls 1 , \
+      f(x) with lines ls 1, \
      'Routing/hypercube.random.VALIANT.txt' using 1:4 title "VALIANT" w p ls 2, \
-     'Routing/hypercube.random.VOCK.txt' using 1:4 title "VOCK" w p ls 3,
+      g(x) with lines ls 2, \
+     'Routing/hypercube.random.VOCK.txt' using 1:4 title "VOCK" w p ls 3, \
+      h(x) with lines ls 3 
 
-set output 'inverse_hypercube_completion.tex'
-set title 'Inverse Permutation in Hypercube [10 trials]'
+set title 'Inverse'
+
+f(x) = a*x + b
+fit f(x) 'Routing/hypercube.inverse.DOR.txt' using 1:4 via a,b
+
+g(x) = a1*x + b1
+fit g(x) 'Routing/hypercube.inverse.VALIANT.txt' using 1:4 via a1,b1
+
+h(x) = a2*x + b2
+fit h(x) 'Routing/hypercube.inverse.VOCK.txt' using 1:4 via a2,b2
 
 plot 'Routing/hypercube.inverse.DOR.txt' using 1:4 title "DOR" w p ls 1 , \
+      f(x) with lines ls 1, \
      'Routing/hypercube.inverse.VALIANT.txt' using 1:4 title "VALIANT" w p ls 2, \
-     'Routing/hypercube.inverse.VOCK.txt' using 1:4 title "VOCK" w p ls 3,
+      g(x) with lines ls 2, \
+     'Routing/hypercube.inverse.VOCK.txt' using 1:4 title "VOCK" w p ls 3, \
+      h(x) with lines ls 3 
 
 
 set xlabel "Dimensions"
 set ylabel "Dilation"
 
-set output 'inverse_hypercube_dilation.tex'
-set title 'Inverse Permutation in Hypercube [10 trials]'
+set title 'Random'
 
-plot 'Routing/hypercube.inverse.DOR.txt' using 1:5 title "DOR" w p ls 1 , \
-     'Routing/hypercube.inverse.VALIANT.txt' using 1:5 title "VALIANT" w p ls 2, \
-     'Routing/hypercube.inverse.VOCK.txt' using 1:5 title "VOCK" w p ls 3,
+f(x) = a*x + b
+fit f(x) 'Routing/hypercube.random.DOR.txt' using 1:5 via a,b
 
+g(x) = a1*x + b1
+fit g(x) 'Routing/hypercube.random.VALIANT.txt' using 1:5 via a1,b1
 
-set output 'random_hypercube_dilation.tex'
-set title 'Random Permutation in Hypercube [10 trials]'
+h(x) = a2*x + b2
+fit h(x) 'Routing/hypercube.random.VOCK.txt' using 1:5 via a2,b2
 
 plot 'Routing/hypercube.random.DOR.txt' using 1:5 title "DOR" w p ls 1 , \
+      f(x) with lines ls 1, \
      'Routing/hypercube.random.VALIANT.txt' using 1:5 title "VALIANT" w p ls 2, \
-     'Routing/hypercube.random.VOCK.txt' using 1:5 title "VOCK" w p ls 3,
+      g(x) with lines ls 2, \
+     'Routing/hypercube.random.VOCK.txt' using 1:5 title "VOCK" w p ls 3, \
+      h(x) with lines ls 3
+
+set title 'Random'
+
+f(x) = a*x + b
+fit f(x) 'Routing/hypercube.inverse.DOR.txt' using 1:5 via a,b
+
+g(x) = a1*x + b1
+fit g(x) 'Routing/hypercube.inverse.VALIANT.txt' using 1:5 via a1,b1
+
+h(x) = a2*x + b2
+fit h(x) 'Routing/hypercube.inverse.VOCK.txt' using 1:5 via a2,b2
+
+plot 'Routing/hypercube.inverse.DOR.txt' using 1:5 title "DOR" w p ls 1 , \
+      f(x) with lines ls 1, \
+     'Routing/hypercube.inverse.VALIANT.txt' using 1:5 title "VALIANT" w p ls 2, \
+      g(x) with lines ls 2, \
+     'Routing/hypercube.inverse.VOCK.txt' using 1:5 title "VOCK" w p ls 3, \
+      h(x) with lines ls 3
+
+
+set xlabel "Dimensions"
+set ylabel "Avg. Congestion"
+
+f(x) = a*x + b
+fit f(x) 'Routing/hypercube.random.DOR.txt' using 1:6 via a,b
+
+g(x) = a1*x + b1
+fit g(x) 'Routing/hypercube.random.VALIANT.txt' using 1:6 via a1,b1
+
+h(x) = a2*x + b2
+fit h(x) 'Routing/hypercube.random.VOCK.txt' using 1:6 via a2,b2
+
+plot 'Routing/hypercube.random.DOR.txt' using 1:6 title "DOR" w p ls 1 , \
+      f(x) with lines ls 1, \
+     'Routing/hypercube.random.VALIANT.txt' using 1:6 title "VALIANT" w p ls 2, \
+      g(x) with lines ls 2, \
+     'Routing/hypercube.random.VOCK.txt' using 1:6 title "VOCK" w p ls 3, \
+      h(x) with lines ls 3
+
+set title 'Inverse'
+
+f(x) = a*x + b
+fit f(x) 'Routing/hypercube.inverse.DOR.txt' using 1:6 via a,b
+
+g(x) = a1*x + b1
+fit g(x) 'Routing/hypercube.inverse.VALIANT.txt' using 1:6 via a1,b1
+
+h(x) = a2*x + b2
+fit h(x) 'Routing/hypercube.inverse.VOCK.txt' using 1:6 via a2,b2
+
+plot 'Routing/hypercube.inverse.DOR.txt' using 1:6 title "DOR" w p ls 1 , \
+      f(x) with lines ls 1, \
+     'Routing/hypercube.inverse.VALIANT.txt' using 1:6 title "VALIANT" w p ls 2, \
+      g(x) with lines ls 2, \
+     'Routing/hypercube.inverse.VOCK.txt' using 1:6 title "VOCK" w p ls 3, \
+      h(x) with lines ls 3
 
